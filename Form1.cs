@@ -146,6 +146,7 @@ namespace RSA_DigitalSignature
                 txtSignature.Text = string.Join(" ", signatures);
 
                 txtVerifyInput.Text = string.Join(" ", signatures);
+                txtVerifyMessage.Text = message;   
 
                 AppendLog("--- KY VAN BAN ---");
                 AppendLog($"  Van ban M = {message}");
@@ -220,7 +221,13 @@ namespace RSA_DigitalSignature
 
                 string recoveredText = allValid ? sb.ToString() : $"[ASCII: {string.Join(", ", recovered)}]";
 
+                string originalMessage = txtVerifyMessage.Text
+                    .Trim()
+                    .Replace(" ", "")
+                    .ToUpperInvariant();
+
                 AppendLog("--- XAC THUC CHU KY ---");
+                AppendLog($"  Van ban M (goc) = {originalMessage}");
                 AppendLog($"  Chu ky S = [{string.Join(", ", sigs)}]");
                 AppendLog($"  Cong thuc: Mi' = Si^dA mod n = Si^{_dA} mod {_n}");
                 AppendLog("");
@@ -235,9 +242,12 @@ namespace RSA_DigitalSignature
                 AppendLog("");
                 AppendLog($"  ASCII khoi phuc = [{string.Join(", ", recovered)}]");
                 AppendLog($"  Van ban khoi phuc = {recoveredText}");
+                AppendLog($"  So sanh: '{recoveredText}' == '{originalMessage}' => {recoveredText == originalMessage}");
                 AppendLog("--------------------------------------------------");
 
-                if (allValid)
+                bool valid = allValid && recoveredText == originalMessage;
+
+                if (valid)
                 {
                     txtVerifyResult.Text = recoveredText;
                     lblVerifyStatus.Text = "CHU KY HOP LE (VALID)";

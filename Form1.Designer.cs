@@ -4,7 +4,6 @@ namespace RSA_DigitalSignature
     {
         private System.ComponentModel.IContainer components = null;
 
-        // ===== PANEL SINH KHÓA =====
         private System.Windows.Forms.GroupBox grpGenKey;
         private System.Windows.Forms.Label lblP;
         private System.Windows.Forms.TextBox txtP;
@@ -16,7 +15,6 @@ namespace RSA_DigitalSignature
         private System.Windows.Forms.TextBox txtPublicKey;
         private System.Windows.Forms.Button btnGenKey;
 
-        // ===== PANEL KÝ VĂN BẢN =====
         private System.Windows.Forms.GroupBox grpSign;
         private System.Windows.Forms.Label lblMessage;
         private System.Windows.Forms.TextBox txtMessage;
@@ -24,8 +22,9 @@ namespace RSA_DigitalSignature
         private System.Windows.Forms.TextBox txtSignature;
         private System.Windows.Forms.Button btnSign;
 
-        // ===== PANEL XÁC THỰC =====
         private System.Windows.Forms.GroupBox grpVerify;
+        private System.Windows.Forms.Label lblVerifyMessage;
+        private System.Windows.Forms.TextBox txtVerifyMessage;
         private System.Windows.Forms.Label lblVerifyInput;
         private System.Windows.Forms.TextBox txtVerifyInput;
         private System.Windows.Forms.Label lblVerifyResultLabel;
@@ -33,12 +32,10 @@ namespace RSA_DigitalSignature
         private System.Windows.Forms.Label lblVerifyStatus;
         private System.Windows.Forms.Button btnVerify;
 
-        // ===== LOG =====
         private System.Windows.Forms.GroupBox grpLog;
         private System.Windows.Forms.RichTextBox txtLog;
         private System.Windows.Forms.Button btnClearLog;
 
-        // Dummy labels (unused but referenced in Form1.cs via out param)
         private System.Windows.Forms.Label lblGenKeyTitle;
         private System.Windows.Forms.Label lblSignTitle;
         private System.Windows.Forms.Label lblVerifyTitle;
@@ -55,26 +52,22 @@ namespace RSA_DigitalSignature
         {
             this.components = new System.ComponentModel.Container();
 
-            // ── Form ──────────────────────────────────────────────────
             this.Text = "Chữ Ký Số RSA - TRUONGTHANHDAT";
             this.Size = new System.Drawing.Size(860, 620);
             this.MinimumSize = new System.Drawing.Size(860, 620);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Font = new System.Drawing.Font("Segoe UI", 9f);
 
-            // Dummy labels to satisfy out params from Form1.cs (not added to any container)
             lblGenKeyTitle = new System.Windows.Forms.Label();
             lblSignTitle   = new System.Windows.Forms.Label();
             lblVerifyTitle = new System.Windows.Forms.Label();
             lblLogTitle    = new System.Windows.Forms.Label();
 
-            // ── GroupBox: SINH KHÓA ───────────────────────────────────
             grpGenKey = new System.Windows.Forms.GroupBox();
             grpGenKey.Text = "SINH KHÓA";
             grpGenKey.Location = new System.Drawing.Point(8, 8);
             grpGenKey.Size = new System.Drawing.Size(400, 260);
 
-            // p
             lblP = new System.Windows.Forms.Label();
             lblP.Text = "p (số nguyên tố):";
             lblP.Location = new System.Drawing.Point(12, 30);
@@ -85,7 +78,6 @@ namespace RSA_DigitalSignature
             txtP.Location = new System.Drawing.Point(160, 27);
             txtP.Width = 80;
 
-            // q
             lblQ = new System.Windows.Forms.Label();
             lblQ.Text = "q (số nguyên tố):";
             lblQ.Location = new System.Drawing.Point(12, 62);
@@ -96,7 +88,6 @@ namespace RSA_DigitalSignature
             txtQ.Location = new System.Drawing.Point(160, 59);
             txtQ.Width = 80;
 
-            // Khóa bí mật eA
             lblSecretKey = new System.Windows.Forms.Label();
             lblSecretKey.Text = "Khóa bí mật eA:";
             lblSecretKey.Location = new System.Drawing.Point(12, 100);
@@ -112,7 +103,6 @@ namespace RSA_DigitalSignature
             lblHintEA.Location = new System.Drawing.Point(248, 100);
             lblHintEA.AutoSize = true;
 
-            // Khóa công khai dA
             lblPublicKey = new System.Windows.Forms.Label();
             lblPublicKey.Text = "Khóa công khai dA:";
             lblPublicKey.Location = new System.Drawing.Point(12, 138);
@@ -123,7 +113,6 @@ namespace RSA_DigitalSignature
             txtPublicKey.Width = 80;
             txtPublicKey.ReadOnly = true;
 
-            // Button Sinh khóa
             btnGenKey = new System.Windows.Forms.Button();
             btnGenKey.Text = "Sinh Khóa";
             btnGenKey.Location = new System.Drawing.Point(140, 175);
@@ -139,7 +128,6 @@ namespace RSA_DigitalSignature
             });
             this.Controls.Add(grpGenKey);
 
-            // ── GroupBox: KÝ VĂN BẢN ─────────────────────────────────
             grpSign = new System.Windows.Forms.GroupBox();
             grpSign.Text = "KÝ VĂN BẢN";
             grpSign.Location = new System.Drawing.Point(8, 276);
@@ -181,47 +169,57 @@ namespace RSA_DigitalSignature
             });
             this.Controls.Add(grpSign);
 
-            // ── GroupBox: XÁC THỰC CHỮ KÝ ────────────────────────────
             grpVerify = new System.Windows.Forms.GroupBox();
             grpVerify.Text = "XÁC THỰC CHỮ KÝ";
             grpVerify.Location = new System.Drawing.Point(416, 8);
-            grpVerify.Size = new System.Drawing.Size(428, 220);
+            grpVerify.Size = new System.Drawing.Size(428, 258);
+
+            lblVerifyMessage = new System.Windows.Forms.Label();
+            lblVerifyMessage.Text = "Văn bản M:";
+            lblVerifyMessage.Location = new System.Drawing.Point(12, 30);
+            lblVerifyMessage.AutoSize = true;
+
+            txtVerifyMessage = new System.Windows.Forms.TextBox();
+            txtVerifyMessage.Location = new System.Drawing.Point(90, 27);
+            txtVerifyMessage.Width = 326;
+            txtVerifyMessage.Text = "TRUONGTHANHDAT";
 
             lblVerifyInput = new System.Windows.Forms.Label();
             lblVerifyInput.Text = "Chữ ký S:";
-            lblVerifyInput.Location = new System.Drawing.Point(12, 30);
+            lblVerifyInput.Location = new System.Drawing.Point(12, 65);
             lblVerifyInput.AutoSize = true;
 
             txtVerifyInput = new System.Windows.Forms.TextBox();
-            txtVerifyInput.Location = new System.Drawing.Point(90, 27);
-            txtVerifyInput.Size = new System.Drawing.Size(326, 55);
+            txtVerifyInput.Location = new System.Drawing.Point(90, 62);
+            txtVerifyInput.Size = new System.Drawing.Size(326, 52);
             txtVerifyInput.Multiline = true;
             txtVerifyInput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
 
             lblVerifyResultLabel = new System.Windows.Forms.Label();
             lblVerifyResultLabel.Text = "Kết quả:";
-            lblVerifyResultLabel.Location = new System.Drawing.Point(12, 100);
+            lblVerifyResultLabel.Location = new System.Drawing.Point(12, 130);
             lblVerifyResultLabel.AutoSize = true;
 
             txtVerifyResult = new System.Windows.Forms.TextBox();
-            txtVerifyResult.Location = new System.Drawing.Point(90, 97);
+            txtVerifyResult.Location = new System.Drawing.Point(90, 127);
             txtVerifyResult.Width = 326;
             txtVerifyResult.ReadOnly = true;
 
             lblVerifyStatus = new System.Windows.Forms.Label();
             lblVerifyStatus.Text = "— chưa xác thực —";
-            lblVerifyStatus.Location = new System.Drawing.Point(90, 130);
+            lblVerifyStatus.Location = new System.Drawing.Point(90, 160);
             lblVerifyStatus.Size = new System.Drawing.Size(326, 22);
             lblVerifyStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 
             btnVerify = new System.Windows.Forms.Button();
             btnVerify.Text = "Xác Thực";
-            btnVerify.Location = new System.Drawing.Point(154, 162);
+            btnVerify.Location = new System.Drawing.Point(154, 196);
             btnVerify.Size = new System.Drawing.Size(120, 28);
             btnVerify.Click += new System.EventHandler(this.btnVerify_Click);
 
             grpVerify.Controls.AddRange(new System.Windows.Forms.Control[]
             {
+                lblVerifyMessage, txtVerifyMessage,
                 lblVerifyInput, txtVerifyInput,
                 lblVerifyResultLabel, txtVerifyResult,
                 lblVerifyStatus,
@@ -229,22 +227,21 @@ namespace RSA_DigitalSignature
             });
             this.Controls.Add(grpVerify);
 
-            // ── GroupBox: NHẬT KÝ TÍNH TOÁN ──────────────────────────
             grpLog = new System.Windows.Forms.GroupBox();
             grpLog.Text = "Nhật Ký Tính Toán";
-            grpLog.Location = new System.Drawing.Point(416, 236);
-            grpLog.Size = new System.Drawing.Size(428, 240);
+            grpLog.Location = new System.Drawing.Point(416, 274);
+            grpLog.Size = new System.Drawing.Size(428, 202);
 
             txtLog = new System.Windows.Forms.RichTextBox();
             txtLog.Location = new System.Drawing.Point(8, 20);
-            txtLog.Size = new System.Drawing.Size(408, 178);
+            txtLog.Size = new System.Drawing.Size(408, 142);
             txtLog.ReadOnly = true;
             txtLog.Font = new System.Drawing.Font("Consolas", 8.5f);
             txtLog.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
 
             btnClearLog = new System.Windows.Forms.Button();
             btnClearLog.Text = "Xóa Log";
-            btnClearLog.Location = new System.Drawing.Point(328, 204);
+            btnClearLog.Location = new System.Drawing.Point(328, 168);
             btnClearLog.Size = new System.Drawing.Size(88, 26);
             btnClearLog.Click += new System.EventHandler(this.btnClearLog_Click);
 
