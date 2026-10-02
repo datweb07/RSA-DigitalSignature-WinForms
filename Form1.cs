@@ -19,7 +19,7 @@ namespace RSA_DigitalSignature
         public Form1()
         {
             InitializeComponent();
-            this.Text = "Chữ Ký Số RSA - TRUONGTHANHDAT";
+            this.Text = "Chữ Ký Số RSA";
             SetDefaults();
         }
 

@@ -14,3 +14,4 @@ D:\RSA_DigitalSignature\obj\Debug\net8.0-windows\RSA_DigitalSignature.genruntime
 D:\RSA_DigitalSignature\obj\Debug\net8.0-windows\ref\RSA_DigitalSignature.dll
 D:\RSA_DigitalSignature\obj\Debug\net8.0-windows\RSA_DigitalSignature.Form1.resources
 D:\RSA_DigitalSignature\obj\Debug\net8.0-windows\RSA_DigitalSignature.csproj.GenerateResource.cache
+D:\RSA_DigitalSignature\obj\Debug\net8.0-windows\RSA_DigitalSignature.sourcelink.json
